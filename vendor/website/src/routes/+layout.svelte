@@ -1,9 +1,7 @@
 <script lang="ts">
 	import '@oddbird/popover-polyfill';
-	import '@fontsource/poppins/800.css';
-	import '@fontsource-variable/atkinson-hyperlegible-next';
-	import '@fontsource-variable/noto-sans';
-	import '@fontsource-variable/noto-sans-arabic';
+	import '@fontsource-variable/rubik';
+	import '@fontsource/rubik-mono-one';
 
 	import { onMount, type Snippet, untrack } from 'svelte';
 	import { navigating, page } from '$app/state';
@@ -64,35 +62,37 @@
 {/if}
 
 <style>
+	/* Cinematen Cinematic Noir / Obsidian Blue — dark-only, canonical periwinkle tokens.
+	   Source: Cinematen_Desing_system/tokens/colors.css. No light theme. */
 	:root {
 		/* surface */
-		--surface: #fffbf5;
-		--on-surface: #241f31;
-		--surface-variant: #ede7df;
-		--on-surface-variant: #4d4843;
-		--outline: color-mix(in srgb, var(--on-surface) 25%, transparent);
+		--surface: #0d1730;
+		--on-surface: #e2e2e8;
+		--surface-variant: #333539;
+		--on-surface-variant: #c2c6d6;
+		--outline: #8c909f;
 
-		/* primary (brand red) */
-		--primary: #d4131b;
-		--on-primary: #ffffff;
-		--primary-container: #ffdad6;
-		--on-primary-container: #410002;
+		/* primary (periwinkle) */
+		--primary: #adc6ff;
+		--on-primary: #002e6a;
+		--primary-container: #4d8eff;
+		--on-primary-container: #00285d;
 
-		/* secondary (indigo) */
-		--secondary: #4a5078;
-		--on-secondary: #ffffff;
-		--secondary-container: #dde1ff;
-		--on-secondary-container: #141b42;
+		/* secondary (neutral accent) */
+		--secondary: #c6c6c7;
+		--on-secondary: #2f3131;
+		--secondary-container: #454747;
+		--on-secondary-container: #b4b5b5;
 
-		/* tertiary (warm gray) */
-		--tertiary: #78736d;
-		--on-tertiary: #ffffff;
-		--tertiary-container: #e8e0d8;
-		--on-tertiary-container: #2e2a25;
+		/* tertiary (neutral accent) */
+		--tertiary: #c0c7d3;
+		--on-tertiary: #2a313b;
+		--tertiary-container: #8a919d;
+		--on-tertiary-container: #232a34;
 
-		/* fixed light/dark values (not theme-responsive) */
-		--palette-light: #fffbf5;
-		--palette-dark: #241f31;
+		/* fixed light/dark values (not theme-responsive) — text on colored/dark buttons */
+		--palette-light: #e2e2e8;
+		--palette-dark: #0a1128;
 
 		/* Game results. Deliberately not green/red: that is the pair red-green colour
 		   blindness collapses, and here colour is the only thing separating correct from
@@ -101,110 +101,34 @@
 		--correct: #0072b2;
 		--incorrect: #d55e00;
 
-		/* answer-button palette (8 colors, paired bg + deep) */
-		--btn-bg-0: hsl(358, 84%, 45%);
-		--btn-deep-0: hsl(358, 84%, 35%);
-		--btn-bg-1: hsl(205, 84%, 30%);
-		--btn-deep-1: hsl(205, 84%, 20%);
-		--btn-bg-2: hsl(120, 83%, 18%);
-		--btn-deep-2: hsl(120, 83%, 8%);
-		--btn-bg-3: hsl(25, 84%, 48%);
-		--btn-deep-3: hsl(25, 84%, 38%);
-		--btn-bg-4: hsl(318, 84%, 25%);
-		--btn-deep-4: hsl(318, 84%, 15%);
-		--btn-bg-5: hsl(179, 84%, 32%);
-		--btn-deep-5: hsl(179, 84%, 22%);
-		--btn-bg-6: hsl(69, 84%, 40%);
-		--btn-deep-6: hsl(69, 84%, 30%);
-		--btn-bg-7: hsl(0, 0%, 20%);
-		--btn-deep-7: hsl(0, 0%, 10%);
-
-		@media (prefers-color-scheme: dark) {
-			--surface: #241f31;
-			--on-surface: #fffbf5;
-			--surface-variant: #3d3849;
-			--on-surface-variant: #c9c4bf;
-			--outline: color-mix(in srgb, var(--on-surface) 25%, transparent);
-
-			--primary: #d4131b;
-			--on-primary: #ffffff;
-			--primary-container: #930009;
-			--on-primary-container: #ffdad6;
-
-			--secondary: #4a5078;
-			--on-secondary: #ffffff;
-			--secondary-container: #3e4560;
-			--on-secondary-container: #dde1ff;
-
-			--tertiary: #78736d;
-			--on-tertiary: #ffffff;
-			--tertiary-container: #4b4641;
-			--on-tertiary-container: #e8e0d8;
-		}
-	}
-
-	:global(html[data-theme='light']) {
-		--surface: #fffbf5;
-		--on-surface: #241f31;
-		--surface-variant: #ede7df;
-		--on-surface-variant: #4d4843;
-		--outline: color-mix(in srgb, var(--on-surface) 25%, transparent);
-
-		--primary: #d4131b;
-		--on-primary: #ffffff;
-		--primary-container: #ffdad6;
-		--on-primary-container: #410002;
-
-		--secondary: #4a5078;
-		--on-secondary: #ffffff;
-		--secondary-container: #dde1ff;
-		--on-secondary-container: #141b42;
-
-		--tertiary: #78736d;
-		--on-tertiary: #ffffff;
-		--tertiary-container: #e8e0d8;
-		--on-tertiary-container: #2e2a25;
-
-		color-scheme: light;
-	}
-
-	:global(html[data-theme='dark']) {
-		--surface: #241f31;
-		--on-surface: #fffbf5;
-		--surface-variant: #3d3849;
-		--on-surface-variant: #c9c4bf;
-		--outline: color-mix(in srgb, var(--on-surface) 25%, transparent);
-
-		--primary: #d4131b;
-		--on-primary: #ffffff;
-		--primary-container: #930009;
-		--on-primary-container: #ffdad6;
-
-		--secondary: #4a5078;
-		--on-secondary: #ffffff;
-		--secondary-container: #3e4560;
-		--on-secondary-container: #dde1ff;
-
-		--tertiary: #78736d;
-		--on-tertiary: #ffffff;
-		--tertiary-container: #4b4641;
-		--on-tertiary-container: #e8e0d8;
+		/* answer-button palette (8 colors, paired bg + deep) — Obsidian Blue mood,
+		   spectrum retained for answer-distinguishability, no legacy accent colors used */
+		--btn-bg-0: hsl(355, 70%, 40%);
+		--btn-deep-0: hsl(355, 70%, 28%);
+		--btn-bg-1: hsl(221, 70%, 40%);
+		--btn-deep-1: hsl(221, 70%, 28%);
+		--btn-bg-2: hsl(165, 55%, 28%);
+		--btn-deep-2: hsl(165, 55%, 18%);
+		--btn-bg-3: hsl(30, 70%, 42%);
+		--btn-deep-3: hsl(30, 70%, 30%);
+		--btn-bg-4: hsl(280, 55%, 38%);
+		--btn-deep-4: hsl(280, 55%, 26%);
+		--btn-bg-5: hsl(195, 60%, 32%);
+		--btn-deep-5: hsl(195, 60%, 22%);
+		--btn-bg-6: hsl(90, 45%, 35%);
+		--btn-deep-6: hsl(90, 45%, 24%);
+		--btn-bg-7: hsl(0, 0%, 22%);
+		--btn-deep-7: hsl(0, 0%, 14%);
 
 		color-scheme: dark;
 	}
 
-	@font-face {
-		font-family: 'Atkinson Hyperlegible Next Variable Fallback';
-		src: local('Arial');
-		ascent-override: 95%;
-		descent-override: 29%;
-		line-gap-override: 0%;
-	}
-
 	:global(body) {
-		font-family: 'Atkinson Hyperlegible Next Variable', 'Noto Sans Variable', 'Noto Sans Arabic Variable', 'Atkinson Hyperlegible Next Variable Fallback', sans-serif;
-		--alternative-font: 'Poppins', 'Atkinson Hyperlegible Next Variable', 'Noto Sans Variable', 'Noto Sans Arabic Variable', 'Atkinson Hyperlegible Next Variable Fallback', sans-serif;
-		font-size: 20px;
+		font-family: var(--font-sans), sans-serif;
+		--font-sans: 'Rubik Variable', 'Rubik', sans-serif;
+		--font-display: 'Rubik Mono One', 'Rubik Variable', 'Rubik', sans-serif;
+		--alternative-font: var(--font-sans);
+		font-size: 16px;
 		color: var(--on-surface);
 	}
 

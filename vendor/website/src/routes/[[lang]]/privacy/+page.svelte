@@ -11,21 +11,26 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta property="og:title" content={title} />
-	<meta name="description" content="Privacy Policy for Fuiz" />
-	<meta property="og:description" content="Privacy Policy for Fuiz" />
+	<meta name="description" content="Privacyverklaring voor Cinematen Quiz" />
+	<meta property="og:description" content="Privacyverklaring voor Cinematen Quiz" />
 	<link rel="canonical" href={localizeHref(`${env.PUBLIC_PLAY_URL}/privacy`)} />
 </svelte:head>
 
 <TypicalPage>
 	<article>
-		<h1>Privacy Policy</h1>
-		<p class="updated">Last updated: May 25, 2026</p>
+		<h1>Privacyverklaring</h1>
+		<p class="updated">
+			LET OP (redactienotitie, vóór livegang verwijderen): deze pagina is machinaal aangepast van
+			de upstream Fuiz-privacyverklaring en beschrijft nog niet correct de Cinematen self-hosted
+			infrastructuur (VPS/SQLite i.p.v. Cloudflare). Vereist menselijke juridische review voordat
+			de app publiek gaat. Zie ook: <Anchor href="https://cinematen.be">cinematen.be</Anchor> voor
+			het bestaande Cinematen privacybeleid.
+		</p>
 
 		<p>
-			Fuiz (<Anchor href="https://fuiz.org">fuiz.org</Anchor>) is an open-source, privacy-focused
-			learning platform operated by
-			<Anchor href="https://beyondexpiry.org/">Beyond Expiry</Anchor>. This policy describes what
-			data we collect, how we use it, and your rights regarding that data.
+			Cinematen Quiz is een self-hosted livequiz-platform, gebaseerd op de open-source Fuiz-engine
+			en beheerd door Cinematen. Deze verklaring beschrijft welke gegevens verzameld worden,
+			hoe die gebruikt worden, en je rechten hieromtrent.
 		</p>
 
 		<h2>1. Data We Collect</h2>

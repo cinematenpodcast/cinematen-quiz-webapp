@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/assets/logo.svg';
+	import logo from '$lib/assets/cinematen/logo-horizontal-white.png';
 	import * as m from '$lib/paraglide/messages.js';
 
 	let { height = 60 }: { height?: number } = $props();

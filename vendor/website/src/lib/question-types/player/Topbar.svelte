@@ -6,11 +6,8 @@
 	import Modal from '$lib/feedback/Modal.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
-	import DarkModeSwitcher from '$lib/ui/DarkModeSwitcher.svelte';
 	import FancyButton from '$lib/ui/FancyButton.svelte';
 	import IconButton from '$lib/ui/IconButton.svelte';
-	import LanguageSwitcher from '$lib/ui/LanguageSwitcher.svelte';
-	import { theme } from '$lib/ui/theme.svelte';
 	import SettingsOutline from '~icons/material-symbols/settings-outline';
 	import SportsScore from '~icons/material-symbols/sports-score';
 
@@ -59,14 +56,6 @@
 				<div class="code">{gameCode}</div>
 			</div>
 		{/if}
-		<div class="row">
-			<div class="label">{m.language()}</div>
-			<LanguageSwitcher id="topbar-settings-lang" up={true} />
-		</div>
-		<div class="row">
-			<div class="label">{theme.current === 'dark' ? m.switch_light() : m.switch_dark()}</div>
-			<DarkModeSwitcher />
-		</div>
 		<FancyButton onclick={confirmExit}>
 			<div class="leave-label">{m.exit()}</div>
 		</FancyButton>

@@ -2,8 +2,6 @@
 	import Anchor from '$lib/navigation/Anchor.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
-	import DarkModeSwitcher from '$lib/ui/DarkModeSwitcher.svelte';
-	import LanguageSwitcher from '$lib/ui/LanguageSwitcher.svelte';
 	import Balance from '~icons/material-symbols/balance';
 	import Description from '~icons/material-symbols/description';
 	import Diversity1 from '~icons/material-symbols/diversity-1';
@@ -17,11 +15,11 @@
 			<div>{m.community()}</div>
 		</div>
 	</Anchor>
-	<Anchor href="https://gitlab.com/fuiz/website">
+	<Anchor href="https://github.com/cinematenpodcast/cinematen-quiz-webapp">
 		<div class="link">
 			<Balance height="1em" title={m.open_source()} />
 			<!-- i18n-ignore -->
-			<div>GNU AGPLv3</div>
+			<div>Broncode (AGPLv3)</div>
 		</div>
 	</Anchor>
 	<Anchor href={localizeHref('/privacy')}>
@@ -36,8 +34,6 @@
 			<div>{m.terms_of_service()}</div>
 		</div>
 	</Anchor>
-	<LanguageSwitcher id="footer" up={true} />
-	<DarkModeSwitcher />
 </div>
 
 <style>

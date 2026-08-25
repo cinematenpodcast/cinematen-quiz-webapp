@@ -6,24 +6,26 @@
 </script>
 
 <svelte:head>
-	<title>Terms of Service</title>
-	<meta property="og:title" content="Terms of Service" />
-	<meta name="description" content="Terms of Service for Fuiz" />
-	<meta property="og:description" content="Terms of Service for Fuiz" />
+	<title>Gebruiksvoorwaarden</title>
+	<meta property="og:title" content="Gebruiksvoorwaarden" />
+	<meta name="description" content="Gebruiksvoorwaarden voor Cinematen Quiz" />
+	<meta property="og:description" content="Gebruiksvoorwaarden voor Cinematen Quiz" />
 	<link rel="canonical" href={localizeHref(`${env.PUBLIC_PLAY_URL}/terms`)} />
 </svelte:head>
 
 <TypicalPage>
 	<article>
-		<h1>Terms of Service</h1>
-		<p class="updated">Last updated: May 25, 2026</p>
+		<h1>Gebruiksvoorwaarden</h1>
+		<p class="updated">
+			LET OP (redactienotitie, vóór livegang verwijderen): deze pagina is machinaal aangepast van
+			de upstream Fuiz-voorwaarden. Vereist menselijke juridische review voordat de app publiek
+			gaat.
+		</p>
 
 		<p>
-			These Terms of Service ("Terms") govern your use of Fuiz (<Anchor href="https://fuiz.org"
-				>fuiz.org</Anchor
-			>), an open-source learning platform operated by
-			<Anchor href="https://beyondexpiry.org/">Beyond Expiry</Anchor>. By accessing or using Fuiz,
-			you agree to be bound by these Terms.
+			Deze gebruiksvoorwaarden ("Voorwaarden") regelen je gebruik van Cinematen Quiz, een
+			self-hosted livequiz-platform gebaseerd op de open-source Fuiz-engine, beheerd door
+			Cinematen. Door Cinematen Quiz te gebruiken, ga je akkoord met deze Voorwaarden.
 		</p>
 
 		<h2>1. Description of Service</h2>

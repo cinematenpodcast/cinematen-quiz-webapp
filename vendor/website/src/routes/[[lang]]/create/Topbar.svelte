@@ -63,7 +63,7 @@
 
 <header class="topbar">
 	<!-- i18n-ignore -->
-	<a class="brand" href={resolve(localizeHref('/create'))} title="Fuiz">
+	<a class="brand" href={resolve(localizeHref('/create'))} title="Cinematen Quiz">
 		<Logo height={36} />
 	</a>
 

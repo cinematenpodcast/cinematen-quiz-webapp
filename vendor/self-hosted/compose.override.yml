@@ -1,0 +1,8 @@
+services:
+  # Cinematen-branded frontend, built from the vendored+restyled website source
+  # instead of the upstream registry.gitlab.com/fuiz/website image.
+  web:
+    image: fuiz-web:cinematen
+    build:
+      context: ../website
+      dockerfile: Dockerfile

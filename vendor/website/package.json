@@ -1,5 +1,5 @@
 {
-	"name": "fuiz-website",
+	"name": "cinematen-quiz-web",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
@@ -49,10 +49,8 @@
 		"wrangler": "^4.114.0"
 	},
 	"dependencies": {
-		"@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
-		"@fontsource-variable/noto-sans": "^5.3.0",
-		"@fontsource-variable/noto-sans-arabic": "^5.3.0",
-		"@fontsource/poppins": "^5.3.0",
+		"@fontsource-variable/rubik": "^5.3.0",
+		"@fontsource/rubik-mono-one": "^5.3.0",
 		"@oddbird/popover-polyfill": "^0.7.1",
 		"@thisux/sveltednd": "^0.4.1",
 		"interestfor": "^1.0.8",

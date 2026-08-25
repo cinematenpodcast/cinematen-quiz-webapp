@@ -3,9 +3,7 @@
 	import Modal from '$lib/feedback/Modal.svelte';
 	import Fullscreen from '$lib/layout/Fullscreen.svelte';
 	import * as m from '$lib/paraglide/messages.js';
-	import DarkModeSwitcher from '$lib/ui/DarkModeSwitcher.svelte';
 	import IconButton from '$lib/ui/IconButton.svelte';
-	import LanguageSwitcher from '$lib/ui/LanguageSwitcher.svelte';
 	import StatedIconButton from '$lib/ui/StatedIconButton.svelte';
 	import Groups3Outline from '~icons/material-symbols/groups-3-outline';
 	import GroupsOutline from '~icons/material-symbols/groups-outline';
@@ -117,8 +115,6 @@
 			bind:state={bindableGameInfo.locked}
 			onchange={onlock}
 		/>
-		<LanguageSwitcher id="topbar" />
-		<DarkModeSwitcher />
 		<StatedIconButton
 			icons={[
 				{ component: VolumeOffOutline, alt: m.turn_on_music() },
