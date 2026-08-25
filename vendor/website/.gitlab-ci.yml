@@ -1,0 +1,74 @@
+stages:
+  - test
+  - lint
+  - build
+
+test:
+  stage: test
+  image: oven/bun:alpine
+  script:
+    - bun install --frozen-lockfile
+    - bun run test
+  rules:
+    - changes:
+        - src/**/*.{ts,js}
+        - bun.lock
+
+check-messages:
+  stage: lint
+  image: oven/bun:alpine
+  script:
+    - bun scripts/check-messages.js
+  rules:
+    - changes:
+        - messages/*.json
+
+find-unused-messages:
+  stage: lint
+  image: oven/bun:alpine
+  script:
+    - bun scripts/find-unused-messages.js
+  rules:
+    - changes:
+        - messages/*.json
+        - src/**/*.{svelte,ts,js}
+        - scripts/find-unused-messages.js
+
+find-untranslated:
+  stage: lint
+  image: oven/bun:alpine
+  script:
+    - bun install --frozen-lockfile
+    - bun scripts/find-untranslated.js
+  rules:
+    - changes:
+        - messages/en.json
+        - src/**/*.svelte
+        - scripts/find-untranslated.js
+
+lint:
+  stage: lint
+  image: oven/bun:alpine
+  script:
+    - bun install --frozen-lockfile
+    - bun run lint
+  rules:
+    - changes:
+        - src/**/*.{svelte,ts,js}
+        - bun.lock
+
+build-image:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

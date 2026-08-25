@@ -1,0 +1,127 @@
+<script lang="ts">
+	import type { FullAutoFill } from 'svelte/elements';
+	import * as m from '$lib/paraglide/messages.js';
+
+	import ErrorOutline from '~icons/material-symbols/error-outline';
+
+	let {
+		id,
+		placeholder,
+		required,
+		disabled,
+		value = $bindable(),
+		textTransform = '',
+		autocomplete = 'off',
+		maxLength = undefined,
+		minLength = undefined,
+		showInvalid = true,
+		inputmode = undefined
+	}: {
+		id: string;
+		placeholder: string;
+		required: boolean;
+		disabled: boolean;
+		value: string | undefined;
+		textTransform?: string;
+		autocomplete?: FullAutoFill | null;
+		maxLength?: number;
+		minLength?: number;
+		showInvalid?: boolean;
+		inputmode?: 'text' | 'search' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal';
+	} = $props();
+</script>
+
+<div>
+	<input
+		class={showInvalid ? 'show-invalid' : ''}
+		{id}
+		name={id}
+		{autocomplete}
+		type="text"
+		style:--tt={textTransform}
+		{required}
+		{disabled}
+		placeholder=""
+		bind:value
+		maxlength={maxLength}
+		minlength={minLength}
+		{inputmode}
+	/>
+	<label for={id}>{placeholder}</label>
+	<div id="error">
+		<ErrorOutline height="1.2em" title={m.length_too_short()} />
+	</div>
+</div>
+
+<style>
+	div {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	label {
+		text-align: center;
+		color: color-mix(in srgb, currentColor 50%, transparent);
+		padding: 0 8px;
+		position: absolute;
+		pointer-events: none;
+		border-radius: 5px 5px 0 0;
+		top: 50%;
+		transform: translateY(-50%);
+		line-height: 10px;
+		transform-origin: top;
+		transition: all 100ms linear;
+	}
+
+	input:is(:global(:not(:placeholder-shown), :focus, :active)) + label {
+		top: 0;
+		scale: 0.75;
+		background: var(--surface);
+		transform: translateY(-50%);
+	}
+
+	#error {
+		display: none;
+	}
+
+	input.show-invalid:invalid {
+		padding-right: 1.8em;
+
+		& ~ #error {
+			color: var(--primary);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			bottom: 0;
+			top: 0;
+			right: 0.4em;
+		}
+	}
+
+	input:focus + label {
+		color: var(--primary);
+	}
+
+	input {
+		background: none;
+		border: 1px solid var(--outline);
+		border-radius: 0.7em;
+		width: 100%;
+		color: inherit;
+		box-sizing: border-box;
+		font: inherit;
+		text-align: center;
+		text-transform: var(--tt);
+		padding: 8px 5px;
+		resize: none;
+		transition: border-color 100ms linear;
+	}
+
+	input:focus {
+		outline: none;
+		border-color: var(--primary);
+	}
+</style>
