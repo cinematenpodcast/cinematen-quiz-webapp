@@ -1,0 +1,24 @@
+:root{
+--space-base:8px;
+--space-gutter:24px;
+--space-margin-mobile:16px;
+--space-margin-desktop:64px;
+--container-max:1280px;
+
+--radius-sm:0.25rem;
+--radius-md:0.5rem;
+--radius-lg:0.75rem;
+--radius-xl:1rem;
+--radius-2xl:1.5rem;
+--radius-full:9999px;
+
+/* Elevation via tonal layers, not shadow — background lightens per level */
+--elevation-0:var(--surface-container-lowest);
+--elevation-1:var(--surface-container-low);
+--elevation-2:var(--surface-container-high);
+
+--shadow-card:0 10px 30px -10px rgba(0,0,0,0.5);
+--shadow-lg:0 25px 50px -12px rgba(0,0,0,0.6);
+
+--blur-glass:20px;
+}

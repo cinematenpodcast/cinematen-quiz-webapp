@@ -1,0 +1,73 @@
+:root{
+/* Base surfaces — "Obsidian Blue" tonal scale, darkest at the bottom */
+--surface-container-lowest:#0a1128;
+--surface-dim:#0d1730;
+--surface:#0d1730;
+--surface-container-low:#142150;
+--surface-container:#1a2a63;
+--surface-container-high:#243677;
+--surface-container-highest:#2f4390;
+--surface-bright:#3a4fa0;
+--surface-variant:#333539;
+--outline:#8c909f;
+--outline-variant:#424754;
+--on-surface:#e2e2e8;
+--on-surface-variant:#c2c6d6;
+--inverse-surface:#e2e2e8;
+--inverse-on-surface:#2f3035;
+
+/* Primary — soft periwinkle, used for active pills, links, focus rings */
+--primary:#adc6ff;
+--on-primary:#002e6a;
+--primary-container:#4d8eff;
+--on-primary-container:#00285d;
+--primary-fixed:#d8e2ff;
+--primary-fixed-dim:#adc6ff;
+--on-primary-fixed:#001a42;
+--on-primary-fixed-variant:#004395;
+--inverse-primary:#005ac2;
+--surface-tint:#adc6ff;
+
+/* Secondary / tertiary — neutral accents for chips, muted UI */
+--secondary:#c6c6c7;
+--on-secondary:#2f3131;
+--secondary-container:#454747;
+--on-secondary-container:#b4b5b5;
+--secondary-fixed:#e2e2e2;
+--secondary-fixed-dim:#c6c6c7;
+--on-secondary-fixed:#1a1c1c;
+--on-secondary-fixed-variant:#454747;
+--tertiary:#c0c7d3;
+--on-tertiary:#2a313b;
+--tertiary-container:#8a919d;
+--on-tertiary-container:#232a34;
+--tertiary-fixed:#dce3f0;
+--tertiary-fixed-dim:#c0c7d3;
+--on-tertiary-fixed:#151c25;
+--on-tertiary-fixed-variant:#404752;
+
+/* Error */
+--error:#ffb4ab;
+--on-error:#690005;
+--error-container:#93000a;
+--on-error-container:#ffdad6;
+
+/* Background */
+--background:#0d1730;
+--on-background:#e2e2e8;
+
+/* Legacy blue accent — used on earlier Homepage layouts (CTAs, nav underline,
+   podcast player). Kept distinct from --primary; see readme Visual Foundations. */
+--accent-blue:#3b82f6;
+--accent-blue-hover:#2563eb;
+--accent-purple:#9333ea;
+--accent-yellow:#eab308;
+
+/* Category/platform brand chips */
+--brand-spotify:#1db954;
+--brand-apple:#b150e2;
+
+/* Card hairline + glow */
+--hairline-on-dark:#ffffff1a;
+--glass-tint:rgba(255,255,255,0.1);
+}

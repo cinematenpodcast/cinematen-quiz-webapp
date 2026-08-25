@@ -1,0 +1,356 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/cards/**",
+              "components/core/**",
+              "components/layout/**",
+              "components/media/**",
+              "components/navigation/**",
+              "image-slot.js",
+              "ui_kits/website-mobile/**",
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Rubik|Rubik Mono One))/i]",
+        "message": "Font not provided by the design system. Available: Rubik, Rubik Mono One."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArticleCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:image|badge|title|excerpt|meta|variant|href|onClick|key|ref|className|style|children)$/]",
+        "message": "<ArticleCard> doesn't accept that prop. Declared props: image, badge, title, excerpt, meta, variant, href, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArticleCard'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:default|overlay|row)$/]",
+        "message": "<ArticleCard> variant must be one of 'default' | 'overlay' | 'row'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|kind|style|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: children, kind, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='kind'] > Literal[value!=/^(?:category|review|blog|retro|live)$/]",
+        "message": "<Badge> kind must be one of 'category' | 'review' | 'blog' | 'retro' | 'live'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Breadcrumb'] > JSXAttribute > JSXIdentifier[name!=/^(?:items|key|ref|className|style|children)$/]",
+        "message": "<Breadcrumb> doesn't accept that prop. Declared props: items."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|size|pill|icon|disabled|onClick|style|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: children, variant, size, pill, icon, disabled, onClick, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|accent|secondary|ghost|spotify|apple)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'accent' | 'secondary' | 'ghost' | 'spotify' | 'apple'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Chip'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|active|onClick|key|ref|className|style|children)$/]",
+        "message": "<Chip> doesn't accept that prop. Declared props: children, active, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='FooterColumn'] > JSXAttribute > JSXIdentifier[name!=/^(?:heading|links|key|ref|className|style|children)$/]",
+        "message": "<FooterColumn> doesn't accept that prop. Declared props: heading, links."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Header'] > JSXAttribute > JSXIdentifier[name!=/^(?:logo|links|linkIcons|activeIndex|partnerLabel|partnerLogo|onLinkClick|mobileCopyright|key|ref|className|style|children)$/]",
+        "message": "<Header> doesn't accept that prop. Declared props: logo, links, linkIcons, activeIndex, partnerLabel, partnerLogo, onLinkClick, mobileCopyright."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='HeroSlide'] > JSXAttribute > JSXIdentifier[name!=/^(?:image|eyebrow|eyebrowColor|title|description|cta|key|ref|className|style|children)$/]",
+        "message": "<HeroSlide> doesn't accept that prop. Declared props: image, eyebrow, eyebrowColor, title, description, cta."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Pagination'] > JSXAttribute > JSXIdentifier[name!=/^(?:page|totalPages|onChange|key|ref|className|style|children)$/]",
+        "message": "<Pagination> doesn't accept that prop. Declared props: page, totalPages, onChange."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PodcastCallout'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|description|variant|ctaLabel|icon|key|ref|className|style|children)$/]",
+        "message": "<PodcastCallout> doesn't accept that prop. Declared props: title, description, variant, ctaLabel, icon."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PodcastCallout'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:banner|inline)$/]",
+        "message": "<PodcastCallout> variant must be one of 'banner' | 'inline'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PodcastPlayer'] > JSXAttribute > JSXIdentifier[name!=/^(?:episodeTitle|progress|currentTime|totalTime|key|ref|className|style|children)$/]",
+        "message": "<PodcastPlayer> doesn't accept that prop. Declared props: episodeTitle, progress, currentTime, totalTime."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "ArticleCard": {
+        "replaces": []
+      },
+      "Badge": {
+        "replaces": []
+      },
+      "Breadcrumb": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "Chip": {
+        "replaces": []
+      },
+      "FooterColumn": {
+        "replaces": []
+      },
+      "Header": {
+        "replaces": []
+      },
+      "HeroSlide": {
+        "replaces": []
+      },
+      "Pagination": {
+        "replaces": []
+      },
+      "PodcastCallout": {
+        "replaces": []
+      },
+      "PodcastPlayer": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent-blue",
+      "--accent-blue-hover",
+      "--accent-purple",
+      "--accent-yellow",
+      "--background",
+      "--blur-glass",
+      "--brand-apple",
+      "--brand-spotify",
+      "--container-max",
+      "--elevation-0",
+      "--elevation-1",
+      "--elevation-2",
+      "--error",
+      "--error-container",
+      "--font-display",
+      "--font-headline-weight",
+      "--font-sans",
+      "--glass-tint",
+      "--hairline-on-dark",
+      "--inverse-on-surface",
+      "--inverse-primary",
+      "--inverse-surface",
+      "--on-background",
+      "--on-error",
+      "--on-error-container",
+      "--on-primary",
+      "--on-primary-container",
+      "--on-primary-fixed",
+      "--on-primary-fixed-variant",
+      "--on-secondary",
+      "--on-secondary-container",
+      "--on-secondary-fixed",
+      "--on-secondary-fixed-variant",
+      "--on-surface",
+      "--on-surface-variant",
+      "--on-tertiary",
+      "--on-tertiary-container",
+      "--on-tertiary-fixed",
+      "--on-tertiary-fixed-variant",
+      "--outline",
+      "--outline-variant",
+      "--primary",
+      "--primary-container",
+      "--primary-fixed",
+      "--primary-fixed-dim",
+      "--radius-2xl",
+      "--radius-full",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-sm",
+      "--radius-xl",
+      "--secondary",
+      "--secondary-container",
+      "--secondary-fixed",
+      "--secondary-fixed-dim",
+      "--shadow-card",
+      "--shadow-lg",
+      "--space-base",
+      "--space-gutter",
+      "--space-margin-desktop",
+      "--space-margin-mobile",
+      "--surface",
+      "--surface-bright",
+      "--surface-container",
+      "--surface-container-high",
+      "--surface-container-highest",
+      "--surface-container-low",
+      "--surface-container-lowest",
+      "--surface-dim",
+      "--surface-tint",
+      "--surface-variant",
+      "--tertiary",
+      "--tertiary-container",
+      "--tertiary-fixed",
+      "--tertiary-fixed-dim",
+      "--text-body-lg-line",
+      "--text-body-lg-size",
+      "--text-body-md-line",
+      "--text-body-md-size",
+      "--text-headline-display-line",
+      "--text-headline-display-size",
+      "--text-headline-display-tracking",
+      "--text-headline-lg-line",
+      "--text-headline-lg-mobile-line",
+      "--text-headline-lg-mobile-size",
+      "--text-headline-lg-size",
+      "--text-headline-lg-tracking",
+      "--text-headline-md-line",
+      "--text-headline-md-size",
+      "--text-headline-md-weight",
+      "--text-label-caps-line",
+      "--text-label-caps-size",
+      "--text-label-caps-tracking",
+      "--text-label-caps-weight"
+    ],
+    "tokenKinds": {
+      "--surface-container-lowest": "color",
+      "--surface-dim": "color",
+      "--surface": "color",
+      "--surface-container-low": "color",
+      "--surface-container": "color",
+      "--surface-container-high": "color",
+      "--surface-container-highest": "color",
+      "--surface-bright": "color",
+      "--surface-variant": "color",
+      "--outline": "color",
+      "--outline-variant": "color",
+      "--on-surface": "color",
+      "--on-surface-variant": "color",
+      "--inverse-surface": "color",
+      "--inverse-on-surface": "color",
+      "--primary": "color",
+      "--on-primary": "color",
+      "--primary-container": "color",
+      "--on-primary-container": "color",
+      "--primary-fixed": "color",
+      "--primary-fixed-dim": "color",
+      "--on-primary-fixed": "color",
+      "--on-primary-fixed-variant": "color",
+      "--inverse-primary": "color",
+      "--surface-tint": "color",
+      "--secondary": "color",
+      "--on-secondary": "color",
+      "--secondary-container": "color",
+      "--on-secondary-container": "color",
+      "--secondary-fixed": "color",
+      "--secondary-fixed-dim": "color",
+      "--on-secondary-fixed": "color",
+      "--on-secondary-fixed-variant": "color",
+      "--tertiary": "color",
+      "--on-tertiary": "color",
+      "--tertiary-container": "color",
+      "--on-tertiary-container": "color",
+      "--tertiary-fixed": "color",
+      "--tertiary-fixed-dim": "color",
+      "--on-tertiary-fixed": "color",
+      "--on-tertiary-fixed-variant": "color",
+      "--error": "color",
+      "--on-error": "color",
+      "--error-container": "color",
+      "--on-error-container": "color",
+      "--background": "color",
+      "--on-background": "color",
+      "--accent-blue": "color",
+      "--accent-blue-hover": "color",
+      "--accent-purple": "color",
+      "--accent-yellow": "color",
+      "--brand-spotify": "color",
+      "--brand-apple": "color",
+      "--hairline-on-dark": "color",
+      "--glass-tint": "color",
+      "--font-display": "font",
+      "--font-sans": "font",
+      "--font-headline-weight": "font",
+      "--text-headline-display-size": "font",
+      "--text-headline-display-line": "font",
+      "--text-headline-display-tracking": "font",
+      "--text-headline-lg-size": "font",
+      "--text-headline-lg-line": "font",
+      "--text-headline-lg-tracking": "font",
+      "--text-headline-lg-mobile-size": "font",
+      "--text-headline-lg-mobile-line": "font",
+      "--text-headline-md-size": "font",
+      "--text-headline-md-line": "font",
+      "--text-headline-md-weight": "font",
+      "--text-body-lg-size": "font",
+      "--text-body-lg-line": "font",
+      "--text-body-md-size": "font",
+      "--text-body-md-line": "font",
+      "--text-label-caps-size": "font",
+      "--text-label-caps-line": "font",
+      "--text-label-caps-tracking": "font",
+      "--text-label-caps-weight": "font",
+      "--space-base": "spacing",
+      "--space-gutter": "spacing",
+      "--space-margin-mobile": "spacing",
+      "--space-margin-desktop": "spacing",
+      "--container-max": "spacing",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-xl": "radius",
+      "--radius-2xl": "radius",
+      "--radius-full": "radius",
+      "--elevation-0": "shadow",
+      "--elevation-1": "shadow",
+      "--elevation-2": "shadow",
+      "--shadow-card": "shadow",
+      "--shadow-lg": "shadow",
+      "--blur-glass": "spacing"
+    },
+    "fontFamilies": [
+      "Rubik",
+      "Rubik Mono One"
+    ]
+  }
+}
