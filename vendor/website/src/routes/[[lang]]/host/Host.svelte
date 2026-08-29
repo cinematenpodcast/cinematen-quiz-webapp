@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount, setContext, untrack } from 'svelte';
 	import { env } from '$env/dynamic/public';
-	import { getFuizOrigin } from '$lib/clientOnly';
 	import ErrorPage from '$lib/feedback/ErrorPage.svelte';
 	import Loading from '$lib/feedback/Loading.svelte';
 	import * as m from '$lib/paraglide/messages.js';
@@ -51,10 +50,17 @@
 	} from './messageHandler';
 	import Question from './Question.svelte';
 	import SlideAnnouncement from './SlideAnnouncement.svelte';
-	import Summary from './Summary.svelte';
+	// Summary screen is intentionally not rendered: the final leaderboard is the
+	// terminal screen (see the 'Summary' branch in the markup below).
 	import Waiting from './Waiting.svelte';
 
 	let currentState = $state<State>();
+
+	// The final ranking, captured just before the backend pushes the end-of-game
+	// Summary. The Summary replaces `currentState` and closes the socket, so the
+	// leaderboard arrays would otherwise be lost. We never show the Summary's
+	// question/answer overview — the final ranking is the terminal screen.
+	let finalLeaderboard = $state<{ current: [string, number][]; prior: [string, number][] }>();
 
 	// Who answered the current slide. Dropped whenever the slide changes so it
 	// can never show stale names.
@@ -274,6 +280,19 @@
 			currentState.index + 1 === currentState.count
 	);
 
+	// Capture the final ranking the moment it is shown, before the backend's
+	// Summary state replaces it and the arrays are lost.
+	$effect(() => {
+		if (
+			currentState !== undefined &&
+			'Slide' in currentState &&
+			'Leaderboard' in currentState.Slide &&
+			currentState.index + 1 === currentState.count
+		) {
+			finalLeaderboard = currentState.Slide.Leaderboard;
+		}
+	});
+
 	function onnext() {
 		if (nextDisabled || currentScreen === undefined) return;
 		// Don't advance past the final ranking into the Summary screen.
@@ -371,19 +390,25 @@
 			bind:bindableGameInfo
 		/>
 	{:else if 'Summary' in currentState.Game}
-		{@const { stats, player_count, config, options, results, team_mapping } =
-			currentState.Game.Summary}
-		<Summary
-			{stats}
-			{player_count}
-			{config}
-			{options}
-			{results}
-			{team_mapping}
-			{code}
-			{capturedResponses}
-			origin={getFuizOrigin(code)}
-		/>
+		<!-- Never show the Summary's question/answer overview. The final ranking
+		     is the terminal screen: keep the last leaderboard on screen. -->
+		{#if finalLeaderboard}
+			<Leaderboard
+				{onlock}
+				bind:bindableGameInfo
+				gameInfo={{
+					gameCode: code,
+					questionIndex: currentState.Game.Summary.config.slides.length - 1,
+					questionTotalCount: currentState.Game.Summary.config.slides.length,
+					nextDisabled: false
+				}}
+				current={finalLeaderboard.current}
+				prior={finalLeaderboard.prior}
+				final={true}
+			/>
+		{:else}
+			<Loading />
+		{/if}
 	{/if}
 {:else if 'Slide' in currentState}
 	{@const { Slide: slide, index, count } = currentState}
