@@ -130,6 +130,13 @@
 			let newMessage: IncomingMessage = JSON.parse(event.data);
 
 			if ('Game' in newMessage) {
+				// Capture the latest ranking as it arrives, before a following Summary
+				// message replaces the state and the arrays are lost. The last one before
+				// the Summary is the final ranking, which we keep on screen instead of
+				// the Summary's question/answer overview.
+				if ('Leaderboard' in newMessage.Game) {
+					finalLeaderboard = newMessage.Game.Leaderboard.leaderboard;
+				}
 				const result = handleGameMessage(newMessage.Game, {
 					code,
 					currentState,
@@ -280,18 +287,8 @@
 			currentState.index + 1 === currentState.count
 	);
 
-	// Capture the final ranking the moment it is shown, before the backend's
-	// Summary state replaces it and the arrays are lost.
-	$effect(() => {
-		if (
-			currentState !== undefined &&
-			'Slide' in currentState &&
-			'Leaderboard' in currentState.Slide &&
-			currentState.index + 1 === currentState.count
-		) {
-			finalLeaderboard = currentState.Slide.Leaderboard;
-		}
-	});
+	// The final ranking is captured directly from the socket message flow (see
+	// the message listener in connectServer) so it survives the Summary state.
 
 	function onnext() {
 		if (nextDisabled || currentScreen === undefined) return;

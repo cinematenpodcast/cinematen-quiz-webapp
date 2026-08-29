@@ -43,7 +43,8 @@
 	import Recorded from './Recorded.svelte';
 	import Result from './Result.svelte';
 	import SlideAnnouncement from './SlideAnnouncement.svelte';
-	import Summary from './Summary.svelte';
+	// Summary screen is intentionally not rendered: the player sees the final
+	// ranking instead (styled like the in-game leaderboard).
 	import WaitingMobile from './WaitingMobile.svelte';
 	import WaitingOthers from './WaitingOthers.svelte';
 
@@ -459,8 +460,13 @@
 	{:else if 'WaitingScreen' in game}
 		<WaitingMobile {name} />
 	{:else if 'Summary' in game}
-		{@const { score, points, config } = game.Summary}
-		<Summary {score} {points} {config} />
+		{@const { score } = game.Summary}
+		<Leaderboard
+			{name}
+			score={score?.points ?? 0}
+			position={score?.position}
+			final={true}
+		/>
 	{:else if 'FindTeam' in game}
 		<FindTeam {name} teamName={game.FindTeam} />
 	{:else if 'TeammatePicker' in game}
