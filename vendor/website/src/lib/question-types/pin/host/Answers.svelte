@@ -1,7 +1,5 @@
 <script lang="ts">
-	import think from '$lib/assets/music/kevin_macleod_thinking_music.mp3';
 	import PinBoard from '$lib/game/PinBoard.svelte';
-	import Audio from '$lib/media/Audio.svelte';
 	import HostLayout from '$lib/question-types/host/HostLayout.svelte';
 	import QuestionHeader from '$lib/question-types/host/QuestionHeader.svelte';
 	import type { BindableGameInfo, SharedGameInfo } from '$lib/question-types/host/types';
@@ -32,7 +30,6 @@
 	} = $props();
 </script>
 
-<Audio audioUrl={think} volumeOn={bindableGameInfo.volumeOn} />
 <HostLayout
 	bind:bindableGameInfo
 	{gameInfo}

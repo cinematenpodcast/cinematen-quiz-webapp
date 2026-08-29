@@ -26,7 +26,6 @@ export interface GameMessageContext {
 	currentState: State | undefined;
 	watcherId: string | undefined;
 	bindableGameInfo: {
-		volumeOn: boolean;
 		locked: boolean;
 	};
 }

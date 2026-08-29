@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { env } from '$env/dynamic/public';
-	import bee3 from '$lib/assets/music/bee3.mp3';
 	import PlayersList from '$lib/game/PlayersList.svelte';
 	import QrCode from '$lib/game/QRCode.svelte';
 	import TeamsList from '$lib/game/TeamsList.svelte';
 	import Fullscreen from '$lib/layout/Fullscreen.svelte';
 	import NiceBackground from '$lib/layout/NiceBackground.svelte';
-	import Audio from '$lib/media/Audio.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	import {
@@ -21,8 +19,6 @@
 	import LockOpenRightOutline from '~icons/material-symbols/lock-open-right-outline';
 	import LockOutline from '~icons/material-symbols/lock-outline';
 	import PersonOutline from '~icons/material-symbols/person-outline';
-	import VolumeOffOutline from '~icons/material-symbols/volume-off-outline';
-	import VolumeUpOutline from '~icons/material-symbols/volume-up-outline';
 
 	let {
 		code,
@@ -93,40 +89,42 @@
 	}
 </script>
 
-<Audio audioUrl={bee3} volumeOn={bindableGameInfo.volumeOn} />
 <div class="container" bind:this={fullscreenElement}>
-	<div class="info-bar">
-		<div class="info-left">
-			<div class="join-info">
-				{m.join_at()}
-				<span class="join-url">
-					{env.PUBLIC_DISPLAY_PLAY_URL}{localizeHref('/play')}
-				</span>
+	<NiceBackground>
+		<div class="layout">
+			<!-- Left column: join info, game code, QR code and the start button -->
+			<div class="join-column">
+				<div class="join-info">
+					{m.join_at()}
+					<span class="join-url">
+						{env.PUBLIC_DISPLAY_PLAY_URL}{localizeHref('/play')}
+					</span>
+				</div>
+				<div class="code-block">
+					<button
+						class="code-button"
+						bind:this={copyButton}
+						onclick={() => { copy_url_to_clipboard(); showCopied(); }}
+						interestfor="hover-popover"
+					>
+						<div class="code-label">{m.game_code()}</div>
+						<div class="code-value">{code}</div>
+					</button>
+					<div id="hover-popover" popover="hint" class="fuiz-popover">{m.copy_clipboard()}</div>
+					<div bind:this={copiedPopover} popover="manual" class="fuiz-popover">{m.copied()}</div>
+				</div>
+				<div class="qr-large">
+					<QrCode url={actualUrl} smallSize="min(36em, 62vw, 70vh)" />
+				</div>
+				<div class="start-button">
+					<FancyButton onclick={onnext} disabled={nextDisabled}>
+						<div class="start-label">{m.start()}</div>
+					</FancyButton>
+				</div>
 			</div>
-		</div>
-		<div class="code-block">
-			<button
-				class="code-button"
-				bind:this={copyButton}
-				onclick={() => { copy_url_to_clipboard(); showCopied(); }}
-				interestfor="hover-popover"
-			>
-				<div class="code-label">{m.game_code()}</div>
-				<div class="code-value">{code}</div>
-			</button>
-			<div id="hover-popover" popover="hint" class="fuiz-popover">{m.copy_clipboard()}</div>
-			<div bind:this={copiedPopover} popover="manual" class="fuiz-popover">{m.copied()}</div>
-			<QrCode url={actualUrl} smallSize="min(9em, 25vw)" />
-		</div>
-		<div class="start-button">
-			<FancyButton onclick={onnext} disabled={nextDisabled}>
-				<div class="start-label">{m.start()}</div>
-			</FancyButton>
-		</div>
-	</div>
-	<div class="content">
-		<NiceBackground>
-			<div class="content-inner">
+
+			<!-- Right column: controls + the list of participants -->
+			<div class="players-column">
 				<div class="controls">
 					<div class="player-count">
 						{#if showingTeams}
@@ -144,13 +142,6 @@
 						bind:state={bindableGameInfo.locked}
 						onchange={onlock}
 					/>
-					<StatedIconButton
-						icons={[
-							{ component: VolumeOffOutline, alt: m.turn_on_music() },
-							{ component: VolumeUpOutline, alt: m.mute_music() }
-						]}
-						bind:state={bindableGameInfo.volumeOn}
-					/>
 					<Fullscreen {fullscreenElement} />
 				</div>
 				<div class="players-area">
@@ -167,8 +158,8 @@
 					</div>
 				</div>
 			</div>
-		</NiceBackground>
-	</div>
+		</div>
+	</NiceBackground>
 </div>
 
 <style>
@@ -178,25 +169,29 @@
 		flex-direction: column;
 	}
 
-	.info-bar {
-		background: var(--surface);
-		box-shadow: 0 2px 2px #00000040;
-		display: flex;
-		align-items: center;
-		gap: 1em;
-		padding: 0.6em 0.8em;
-		justify-content: space-between;
-		flex-wrap: wrap;
+	/* Two columns: join/QR on the left (large), participants on the right. */
+	.layout {
+		height: 100%;
+		box-sizing: border-box;
+		display: grid;
+		grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+		gap: 1.5em;
+		padding: 1.5em;
 	}
 
-	.info-left {
+	/* ---- Left column: join info + code + QR + start ---- */
+	.join-column {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		gap: 0.6em;
-		font-size: 1.5em;
+		justify-content: center;
+		gap: 1em;
+		text-align: center;
+		min-height: 0;
 	}
 
 	.join-info {
+		font-size: 1.5em;
 		padding: 0.2em 0.4em;
 	}
 
@@ -206,9 +201,10 @@
 
 	.code-block {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		padding: 0.4em 0.6em;
-		gap: 0.6em;
+		padding: 0.4em 0.8em;
+		gap: 0.2em;
 		border-radius: 0.6em;
 		background: var(--surface-variant);
 	}
@@ -220,7 +216,7 @@
 		border: none;
 		background: none;
 		cursor: pointer;
-		text-align: start;
+		text-align: center;
 	}
 
 	.code-label {
@@ -229,15 +225,21 @@
 	}
 
 	.code-value {
-		font-size: 4.5em;
+		font-size: min(6em, 14vw);
 		line-height: 1em;
 		text-transform: uppercase;
 		font-weight: 800;
 		font-family: var(--alternative-font);
 	}
 
+	.qr-large {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	.start-button {
-		font-size: 1.5em;
+		font-size: 1.6em;
 	}
 
 	.start-label {
@@ -245,23 +247,19 @@
 		font-family: var(--alternative-font);
 	}
 
-	.content {
-		flex: 1;
-	}
-
-	.content-inner {
-		height: 100%;
+	/* ---- Right column: controls + participants ---- */
+	.players-column {
 		display: flex;
 		flex-direction: column;
-		gap: 0.2em;
-		padding: 0.4em;
-		box-sizing: border-box;
+		gap: 0.4em;
+		min-height: 0;
 	}
 
 	.controls {
 		display: flex;
 		gap: 0.4em;
 		align-items: center;
+		font-size: 1.2em;
 	}
 
 	.player-count {
@@ -273,47 +271,48 @@
 	}
 
 	.players-area {
-		min-height: 40vh;
-		margin: auto;
+		flex: 1;
+		min-height: 0;
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
+		overflow: auto;
 	}
 
 	.players {
 		display: flex;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 		flex-wrap: wrap;
-		max-width: 50ch;
 		gap: 0.3em;
 		padding: 0.2em;
-		overflow: auto;
+		width: 100%;
 		font-size: 1.5em;
 	}
 
-	@media (max-width: 700px) {
-		.info-bar {
-			flex-direction: column;
-			align-items: stretch;
-			gap: 0.5em;
-			padding: 0.4em;
+	/* Stack the two columns on narrow screens (phones). */
+	@media (max-width: 800px) {
+		.layout {
+			grid-template-columns: 1fr;
+			gap: 1em;
+			padding: 0.8em;
 		}
 
-		.code-block {
-			justify-content: space-between;
+		.join-column {
+			justify-content: flex-start;
+			gap: 0.6em;
 		}
 
 		.code-value {
-			font-size: 3em;
+			font-size: min(4em, 18vw);
 		}
 
-		.start-button {
-			text-align: center;
+		.players-area {
+			min-height: 30vh;
 		}
 
 		.players {
-			font-size: 1em;
+			font-size: 1.1em;
 		}
 	}
 </style>

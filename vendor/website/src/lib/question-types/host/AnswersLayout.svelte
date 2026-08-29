@@ -1,6 +1,4 @@
 <script lang="ts">
-	import think from '$lib/assets/music/kevin_macleod_thinking_music.mp3';
-	import Audio from '$lib/media/Audio.svelte';
 	import MediaContainer from '$lib/media/MediaContainer.svelte';
 	import type { Media } from '$lib/types';
 	import HostLayout from './HostLayout.svelte';
@@ -32,7 +30,6 @@
 	} = $props();
 </script>
 
-<Audio audioUrl={think} volumeOn={bindableGameInfo.volumeOn} />
 <HostLayout
 	bind:bindableGameInfo
 	{gameInfo}

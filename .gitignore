@@ -5,3 +5,7 @@ node_modules/
 .env.local
 build/
 .svelte-kit/
+
+# Agent / tooling artifacts
+.omo/
+.opencode/

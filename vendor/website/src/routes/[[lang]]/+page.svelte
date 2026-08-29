@@ -114,7 +114,6 @@
 								}
 							]}
 							bindableGameInfo={{
-								volumeOn: false,
 								locked: false
 							}}
 							gameInfo={{
@@ -137,7 +136,6 @@
 							]}
 							answeredCount={0}
 							bindableGameInfo={{
-								volumeOn: false,
 								locked: false
 							}}
 							gameInfo={{

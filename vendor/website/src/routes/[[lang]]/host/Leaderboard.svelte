@@ -43,7 +43,7 @@
 </script>
 
 <HostLayout bind:bindableGameInfo {gameInfo} {onlock} {onnext}>
-	<TextBar {onnext} text={m.scores()} showNext={true} heading={true} />
+	<TextBar {onnext} text={m.scores()} showNext={!final} heading={true} />
 	<div class="entries">
 		{#each displayed as [name, score], index (name)}
 			<div animate:flip={{ duration, delay }} transition:fly={{ duration, delay, y: '200%' }}>

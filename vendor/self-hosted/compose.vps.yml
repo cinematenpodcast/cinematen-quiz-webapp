@@ -1,0 +1,44 @@
+# VPS-specifieke override voor de gedeelde Cronos AI Lab server.
+#
+# Deze server draait AL een centrale reverse proxy (`caddy-proxy`) die 80/443
+# bezit en TLS regelt via Let's Encrypt. We gebruiken dus NIET Fuiz's eigen
+# Caddy. In plaats daarvan:
+#   - de `caddy`-service uit compose.yml wordt hier ge-disable (replicas 0 kan
+#     niet in compose zonder swarm, dus we overschrijven hem naar een no-op via
+#     `profiles` — hij start alleen als je expliciet het `bundled-proxy` profiel
+#     activeert, wat we hier NIET doen).
+#   - web/game-server/corkboard krijgen vaste containernamen en hangen aan het
+#     externe `proxy`-netwerk, zodat de centrale caddy-proxy ze via die namen
+#     kan bereiken.
+#
+# Gebruik:
+#   docker compose -f compose.yml -f compose.override.yml -f compose.vps.yml up -d --build
+#
+# De routing zelf staat in /opt/caddy-proxy/conf.d/quiz-cinematen.caddy op de host.
+
+services:
+  # Fuiz's eigen Caddy uitschakelen op deze gedeelde server (zou 80/443 stelen).
+  caddy:
+    profiles: ["bundled-proxy"]
+
+  web:
+    container_name: cinematen-quiz-web
+    networks:
+      - default
+      - proxy
+
+  game-server:
+    container_name: cinematen-quiz-game-server
+    networks:
+      - default
+      - proxy
+
+  corkboard:
+    container_name: cinematen-quiz-corkboard
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true

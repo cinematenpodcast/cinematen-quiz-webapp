@@ -10,8 +10,6 @@
 	import LockOpenRightOutline from '~icons/material-symbols/lock-open-right-outline';
 	import LockOutline from '~icons/material-symbols/lock-outline';
 	import SkipNext from '~icons/material-symbols/skip-next';
-	import VolumeOffOutline from '~icons/material-symbols/volume-off-outline';
-	import VolumeUpOutline from '~icons/material-symbols/volume-up-outline';
 	import ExitFuiz from './ExitFuiz.svelte';
 	import TeamRosters from './TeamRosters.svelte';
 	import {
@@ -114,13 +112,6 @@
 			]}
 			bind:state={bindableGameInfo.locked}
 			onchange={onlock}
-		/>
-		<StatedIconButton
-			icons={[
-				{ component: VolumeOffOutline, alt: m.turn_on_music() },
-				{ component: VolumeUpOutline, alt: m.mute_music() }
-			]}
-			bind:state={bindableGameInfo.volumeOn}
 		/>
 		<Fullscreen {fullscreenElement} />
 	</div>

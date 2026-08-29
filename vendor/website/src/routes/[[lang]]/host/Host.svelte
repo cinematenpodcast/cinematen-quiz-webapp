@@ -90,7 +90,6 @@
 	let { code }: { code: string } = $props();
 
 	let bindableGameInfo = $state<BindableGameInfo>({
-		volumeOn: true,
 		locked: false
 	});
 
@@ -116,7 +115,6 @@
 
 		currentState = undefined;
 		bindableGameInfo = {
-			volumeOn: bindableGameInfo.volumeOn,
 			locked: false
 		};
 		let finished = false;
@@ -265,8 +263,21 @@
 		lastSentScreen !== null && JSON.stringify(currentScreen) === lastSentScreen
 	);
 
+	// True while the host is on the final leaderboard (the last ranking of the
+	// game). Advancing from here would make the backend push the question/answer
+	// Summary screen, which we deliberately never show: the final ranking is the
+	// terminal screen.
+	let onFinalLeaderboard = $derived(
+		currentState !== undefined &&
+			'Slide' in currentState &&
+			'Leaderboard' in currentState.Slide &&
+			currentState.index + 1 === currentState.count
+	);
+
 	function onnext() {
 		if (nextDisabled || currentScreen === undefined) return;
+		// Don't advance past the final ranking into the Summary screen.
+		if (onFinalLeaderboard) return;
 		sendEvent(JSON.stringify({ Host: { Next: currentScreen } }));
 		lastSentScreen = JSON.stringify(currentScreen);
 	}
@@ -319,8 +330,19 @@
 
 	onMount(() => {
 		const handleKeydown = (e: KeyboardEvent) => {
-			if (e.key === 'PageDown') {
-				onnext();
+			// PageDown (presentation remotes) and Spacebar both advance the game.
+			if (e.key === 'PageDown' || e.key === ' ' || e.code === 'Space') {
+				// Don't hijack space when a control or text field has focus, so a
+				// focused button/link keeps its native activation.
+				const t = e.target as HTMLElement | null;
+				if (
+					t &&
+					(t.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(t.tagName))
+				) {
+					return;
+				}
+				e.preventDefault(); // stop the default spacebar page-scroll on the projected view
+				onnext(); // internally guarded against double-advance via nextDisabled
 			}
 		};
 

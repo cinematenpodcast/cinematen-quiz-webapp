@@ -8,7 +8,6 @@ export type SharedGameInfo = {
 };
 
 export type BindableGameInfo = {
-	volumeOn: boolean;
 	locked: boolean;
 };
 

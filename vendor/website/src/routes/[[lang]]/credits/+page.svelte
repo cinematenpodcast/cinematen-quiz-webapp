@@ -7,7 +7,6 @@
 	import TypicalPage from '$lib/layout/TypicalPage.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
-	import AlbumOutline from '~icons/material-symbols/album-outline';
 	import BrushOutline from '~icons/material-symbols/brush-outline';
 	import ComputerOutline from '~icons/material-symbols/computer-outline';
 	import Language from '~icons/material-symbols/language';
@@ -102,38 +101,6 @@
 						<span class="contrib-body">
 							<span class="contrib-name"><!-- i18n-ignore -->Zhiron Wu</span>
 							<span class="contrib-role">{m.translator()}</span>
-						</span>
-					</a>
-				</li>
-			</ul>
-		</section>
-
-		<section>
-			<h2 class="section-title">{m.music()}</h2>
-			<ul class="contributors">
-				<li>
-					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-					<a href="https://incompetech.com/wordpress/" class="contrib">
-						<span class="contrib-icon"><AlbumOutline height="1em" width="1em" /></span>
-						<span class="contrib-body">
-							<span class="contrib-name"><!-- i18n-ignore -->Kevin MacLeod</span>
-							<span class="contrib-role">
-								<!-- i18n-ignore -->
-								"Thinking Music" · Licensed under Creative Commons BY 4.0
-							</span>
-						</span>
-					</a>
-				</li>
-				<li>
-					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-					<a
-						href="https://www.youtube.com/watch?v=_h47TNIKJYo&pp=ygUHIGJlZS4gMw%3D%3D"
-						class="contrib"
-					>
-						<span class="contrib-icon"><AlbumOutline height="1em" width="1em" /></span>
-						<span class="contrib-body">
-							<span class="contrib-name"><!-- i18n-ignore -->GroovyDominoes52</span>
-							<span class="contrib-role"><!-- i18n-ignore -->"bee. 3"</span>
 						</span>
 					</a>
 				</li>

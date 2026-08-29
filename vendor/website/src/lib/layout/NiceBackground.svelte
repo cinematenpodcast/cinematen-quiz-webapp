@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import blueberry from '$lib/assets/icons/blueberry.svg';
-	import kiwi from '$lib/assets/icons/kiwi.svg';
-	import orange from '$lib/assets/icons/orange.svg';
-	import strawberry from '$lib/assets/icons/strawberry.svg';
+	import camera from '$lib/assets/icons/camera.svg';
+	import filmReel from '$lib/assets/icons/film-reel.svg';
+	import popcorn from '$lib/assets/icons/popcorn.svg';
+	import ticket from '$lib/assets/icons/ticket.svg';
 	import * as m from '$lib/paraglide/messages.js';
 
 	let { children }: { children?: Snippet } = $props();
@@ -12,17 +12,17 @@
 <div class="root">
 	<div class="backdrop">
 		<div class="pattern">
-			<div class="card-container strawberry">
-				<img src={strawberry} alt={m.strawberry()} />
+			<div class="card-container film-reel">
+				<img src={filmReel} alt={m.film_reel()} />
 			</div>
-			<div class="card-container blueberry">
-				<img src={blueberry} alt={m.blueberries()} />
+			<div class="card-container popcorn">
+				<img src={popcorn} alt={m.popcorn()} />
 			</div>
-			<div class="card-container kiwi">
-				<img src={kiwi} alt={m.kiwi()} />
+			<div class="card-container ticket">
+				<img src={ticket} alt={m.ticket()} />
 			</div>
-			<div class="card-container orange">
-				<img src={orange} alt={m.orange()} />
+			<div class="card-container camera">
+				<img src={camera} alt={m.camera()} />
 			</div>
 		</div>
 	</div>
@@ -67,19 +67,19 @@
 		width: 100%;
 	}
 
-	.strawberry {
+	.film-reel {
 		transform: scale(1) translate(0%, 0%) rotate(0.0625turn);
 	}
 
-	.blueberry {
+	.popcorn {
 		transform: scale(1) translate(0%, -25%) rotate(-0.0625turn);
 	}
 
-	.kiwi {
+	.ticket {
 		transform: scale(1) translate(-25%, 12.5%) rotate(-0.0625turn);
 	}
 
-	.orange {
+	.camera {
 		transform: scale(1) translate(12.5%, -25%) rotate(0.0625turn);
 	}
 </style>

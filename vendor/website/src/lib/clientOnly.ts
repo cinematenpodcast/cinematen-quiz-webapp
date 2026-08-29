@@ -6,14 +6,14 @@ import { env } from '$env/dynamic/public';
 import { stringifyToml, urlifyBase64 } from '$lib';
 import * as m from '$lib/paraglide/messages.js';
 import { localizeHref } from '$lib/paraglide/runtime';
-import BlueberryIcon from '~icons/custom/blueberry';
-import GrapeIcon from '~icons/custom/grape';
-import KiwiIcon from '~icons/custom/kiwi';
-import LemonIcon from '~icons/custom/lemon';
-import OliveIcon from '~icons/custom/olive';
-import OrangeIcon from '~icons/custom/orange';
-import StrawberryIcon from '~icons/custom/strawberry';
-import WatermelonIcon from '~icons/custom/watermelon';
+import CameraIcon from '~icons/custom/camera';
+import ClapperboardIcon from '~icons/custom/clapperboard';
+import FilmReelIcon from '~icons/custom/film-reel';
+import PopcornIcon from '~icons/custom/popcorn';
+import ProjectorIcon from '~icons/custom/projector';
+import SpotlightIcon from '~icons/custom/spotlight';
+import StarIcon from '~icons/custom/star';
+import TicketIcon from '~icons/custom/ticket';
 import {
 	type Base64Media,
 	type CorkboardMedia,
@@ -518,36 +518,36 @@ export const medalColors = ['#C8A200', '#A0A0A0', '#B07D3B'] as const;
 
 export const buttonSymbols = [
 	{
-		icon: StrawberryIcon,
-		label: m.strawberry()
+		icon: FilmReelIcon,
+		label: m.film_reel()
 	},
 	{
-		icon: BlueberryIcon,
-		label: m.blueberries()
+		icon: PopcornIcon,
+		label: m.popcorn()
 	},
 	{
-		icon: KiwiIcon,
-		label: m.kiwi()
+		icon: TicketIcon,
+		label: m.ticket()
 	},
 	{
-		icon: OrangeIcon,
-		label: m.orange()
+		icon: CameraIcon,
+		label: m.camera()
 	},
 	{
-		icon: GrapeIcon,
-		label: m.grape()
+		icon: StarIcon,
+		label: m.star()
 	},
 	{
-		icon: OliveIcon,
-		label: m.olives()
+		icon: SpotlightIcon,
+		label: m.spotlight()
 	},
 	{
-		icon: LemonIcon,
-		label: m.lemon()
+		icon: ClapperboardIcon,
+		label: m.clapperboard()
 	},
 	{
-		icon: WatermelonIcon,
-		label: m.watermelon()
+		icon: ProjectorIcon,
+		label: m.projector()
 	}
 ] as const;
 

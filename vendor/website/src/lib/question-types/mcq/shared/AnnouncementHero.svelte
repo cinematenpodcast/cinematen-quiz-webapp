@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { flyIn, flyOut } from '$lib/animation/flyAway';
-	import Blueberry from '~icons/custom/blueberry';
-	import Kiwi from '~icons/custom/kiwi';
-	import Orange from '~icons/custom/orange';
-	import Strawberry from '~icons/custom/strawberry';
+	import Camera from '~icons/custom/camera';
+	import FilmReel from '~icons/custom/film-reel';
+	import Popcorn from '~icons/custom/popcorn';
+	import Ticket from '~icons/custom/ticket';
 
 	// The announcement glyph for Multiple Choice: the 2x2 answer grid. Sized in
-	// `em` so the parent scene controls the scale.
-	const icons = [Strawberry, Blueberry, Kiwi, Orange];
+	// `em` so the parent scene controls the scale. Order matches palette indices
+	// 0-3 of `buttonSymbols` in clientOnly.ts.
+	const icons = [FilmReel, Popcorn, Ticket, Camera];
 
 	// Each tile flies from / to its own corner of the grid.
 	function corner(i: number) {

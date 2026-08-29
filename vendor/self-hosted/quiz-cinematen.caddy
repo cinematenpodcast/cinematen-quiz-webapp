@@ -1,0 +1,27 @@
+quiz.cinematen.be {
+	encode zstd gzip
+
+	# Game server API (inclusief WebSocket upgrades voor het live quiz-protocol)
+	handle /api/* {
+		uri strip_prefix /api
+		reverse_proxy cinematen-quiz-game-server:8080
+	}
+
+	# Image storage (corkboard)
+	handle /corkboard/* {
+		uri strip_prefix /corkboard
+		reverse_proxy cinematen-quiz-corkboard:5040
+	}
+
+	# SvelteKit frontend (fallback)
+	handle {
+		reverse_proxy cinematen-quiz-web:3000
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}
